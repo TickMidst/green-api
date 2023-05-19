@@ -1,23 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import { AuthorizationPage } from './components/AuthorizationPage';
+import ChatSelector from './components/ChatSelector';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+  const [userAutorized, setUserAutorized] = useState(false)
+
+  const [idInstance, setIdInstance] = useState('');
+  const [apiTokenInstance, setApiTokenInstance] = useState('');
+
+  return ( 
+    <div className='app__wrapper'>
+      {userAutorized 
+      ? <ChatSelector 
+      idInstance={idInstance}
+      apiTokenInstance={apiTokenInstance}
+      /> 
+      : <AuthorizationPage 
+      apiTokenInstance={apiTokenInstance} 
+      setApiTokenInstance={setApiTokenInstance}
+      idInstance={idInstance}
+      setIdInstance={setIdInstance}
+
+      setUserAutorized={setUserAutorized} />}
     </div>
   );
 }
